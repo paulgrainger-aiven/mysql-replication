@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql_main:
+    image: mysql:5.7
+    env_file:
+      - ./conf/mysql_main.env
+    container_name: "mysql_master"
+    restart: "no"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./conf/mysql.main.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./main/data:/var/lib/mysql
+    networks:
+      - my-network
+
+  mysql_replica:
+    image: mysql:5.7
+    env_file:
+      - ./conf/mysql_replica.env
+    container_name: "mysql_replica"
+    restart: "no"
+    ports:
+      - 3307:3306
+    depends_on:
+      - mysql_main
+    volumes:
+      - ./conf/mysql.replica.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./replica/data:/var/lib/mysql
+    networks:
+      - my-network
+
+networks:
+  my-network:
+
