@@ -32,7 +32,7 @@ avn service create \
 
 ```
 
-# Inititiate replication 
+# Initiate replication 
 
 This test will initiate live replication from the replica, to the Aiven for MySQL instance. 
 
