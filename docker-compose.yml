@@ -4,10 +4,10 @@ services:
     image: mysql:5.7
     env_file:
       - ./conf/mysql_main.env
-    container_name: "mysql_master"
+    container_name: "mysql_main"
     restart: "no"
     ports:
-      - 3306:3306
+      - 4306:3306
     volumes:
       - ./conf/mysql.main.cnf:/etc/mysql/conf.d/mysql.conf.cnf
       - ./main/data:/var/lib/mysql
@@ -21,7 +21,7 @@ services:
     container_name: "mysql_replica"
     restart: "no"
     ports:
-      - 3307:3306
+      - 3306:3306
     depends_on:
       - mysql_main
     volumes:
